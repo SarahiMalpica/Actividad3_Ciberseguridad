@@ -37,7 +37,7 @@ Estos tres reportes contienen cero alertas sobre las tres rutas HTTP/JSON. Los a
 
 Las copias compartibles están en `ZAP/`. Los originales autenticados, sesiones y planes temporales permanecen en `Herramientas/` y se excluyen de Git.
 
-## Página y API actualizadas
+## Página y API antes de preparar Render
 
 [18 Pruebas del sitio y API](18_Pruebas_Sitio_API.json) registra 44 comprobaciones correctas y cero fallidas, realizadas el 10 de noviembre de 2026 a las 19:37, hora de Ciudad de México. El JSON conserva la fecha UTC y las huellas de los cuatro archivos examinados.
 
@@ -52,3 +52,11 @@ Además se comprobó en el navegador la presentación en computadora y celular, 
 Para repetir la suite con la API activa, ejecuta `node pruebas-sitio.cjs` desde `API/`. Los informes nuevos se guardan en `Nuevas/`, una carpeta ignorada hasta revisar su contenido. La suite no modifica los originales.
 
 No se volvió a ejecutar LocalStack, Terraform, Trivy o ZAP durante estas comprobaciones de la página. Los resultados previos de ZAP no acreditan cobertura de la nueva interfaz.
+
+## Preparación de Render, sin despliegue
+
+El [reporte 19](19_Preparacion_Render.json) registra 43 comprobaciones de adaptación correctas y una regresión local de 47 casos, sin fallos. Conserva la fecha UTC exacta y las huellas de los archivos examinados; no reemplaza el reporte 18 de la versión anterior.
+
+Los 43 casos incluyen 17 de configuración, una ejecución de la regresión local, 20 de HTTP local con Render emulado, dos del cliente con HTTP real local y tres del cliente simuladas. La regresión de 47 casos contiene 34 de HTTP real, ocho del cliente con API real y cinco simuladas. No se deben sumar ambos totales como pruebas independientes: la regresión está incluida como comprobación de la suite de adaptación.
+
+La emisión de JWT se probó con claves efímeras distintas de la clave del laboratorio. Los tokens no se guardaron en los informes. No se ha desplegado la demo ni comprobado su HTTPS; la revisión visual nueva quedó pendiente por un bloqueo del control de navegador. Consulta el [alcance de Render](../docs/RENDER.md).

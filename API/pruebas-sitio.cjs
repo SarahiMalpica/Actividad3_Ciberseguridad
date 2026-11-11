@@ -9,8 +9,9 @@ const { createHash } = require('node:crypto');
 const { createRequire } = require('node:module');
 
 const api = __dirname;
-const base = 'http://127.0.0.1:3000';
-process.loadEnvFile(path.join(api, '.env'));
+const base = process.env.ACTIVIDAD3_TEST_URL || 'http://127.0.0.1:3000';
+assert.match(base, /^http:\/\/127\.0\.0\.1:\d{1,5}$/);
+if (fs.existsSync(path.join(api, '.env'))) process.loadEnvFile(path.join(api, '.env'));
 const requireApi = createRequire(path.join(api, 'package.json'));
 const jwt = requireApi('jsonwebtoken');
 const secreto = process.env.ACTIVIDAD3_JWT_SECRET;
@@ -84,7 +85,7 @@ function interfaz({ origen = base, peticion = solicitar, temporizador = setTimeo
   const solicitudes = [];
   const sandbox = {
     document: { getElementById: id => elementos[id] },
-    window: { location: { origin: origen }, addEventListener: (tipo, fn) => (eventosVentana[tipo] ||= []).push(fn) },
+    window: { ACTIVIDAD3_CONFIG: { origenesPermitidos: [base], demoPublica: false }, location: { origin: origen }, addEventListener: (tipo, fn) => (eventosVentana[tipo] ||= []).push(fn) },
     Date, AbortController, setTimeout: temporizador, clearTimeout,
     fetch: (ruta, opcionesFetch) => { solicitudes.push({ ruta, opciones: opcionesFetch }); return peticion(ruta, opcionesFetch); }
   };
@@ -148,7 +149,19 @@ async function main() {
       }
     });
   }
-  for (const ruta of ['/.env', '/index.js', '/package.json', '/package-lock.json', '/node_modules/express/package.json', '/pruebas-jwt.js', '/ejecutar-zap-jwt.js', '/%2e%2e%2f.env', '/ruta-inexistente']) {
+  await prueba('HTTP real', 'Configuracion del cliente sin credenciales ni demo local', async () => {
+    const respuesta = await solicitar('/configuracion.js');
+    assert.equal(respuesta.status, 200); cabecerasSeguras(respuesta);
+    assert.match(respuesta.headers.get('content-type'), /javascript/);
+    const contexto = { window: {} };
+    const texto = await respuesta.text();
+    assert.ok(!texto.includes(secreto));
+    vm.runInNewContext(texto, contexto);
+    assert.equal(contexto.window.ACTIVIDAD3_CONFIG.demoPublica, false);
+    assert.ok(contexto.window.ACTIVIDAD3_CONFIG.origenesPermitidos.includes(base));
+    assert.equal((await solicitar('/api/demo/token', { method: 'POST' })).status, 404);
+  });
+  for (const ruta of ['/.env', '/index.js', '/package.json', '/package-lock.json', '/node_modules/express/package.json', '/pruebas-jwt.js', '/ejecutar-zap-jwt.js', '/%2e%2e%2f.env', '/ruta-inexistente', '/configuracion-servidor.cjs', '/pruebas-render.cjs']) {
     await prueba('HTTP real', 'No publicar ' + ruta, async () => {
       const respuesta = await solicitar(ruta);
       assert.equal(respuesta.status, 404); cabecerasSeguras(respuesta);

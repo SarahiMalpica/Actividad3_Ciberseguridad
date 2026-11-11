@@ -12,6 +12,14 @@ Laboratorio académico en Windows para comprobar autenticación JWT, permisos po
 
 La API se ejecuta directamente en Windows. LocalStack emula S3, IAM, STS y S3 Control dentro de Docker. Son flujos independientes: la API devuelve datos simulados y no accede al bucket.
 
+## Demo para el profesor
+
+Está preparada una demo de la página y la API para **Render Free**, con Node.js 24.13.0 y sin una cuenta real de AWS. **Todavía no se ha desplegado y no existe un enlace público de la demo.** La configuración y el procedimiento están en la [guía de Render](docs/RENDER.md).
+
+En el modo de demostración aparecen **Usar usuario** y **Usar administrador**: el servidor emite un JWT de prueba de cinco minutos y mantiene los controles de firma, vigencia y permisos. Son roles públicos para datos simulados; no constituyen un inicio de sesión con cuentas reales. En el laboratorio local la emisión está desactivada.
+
+La demo no ejecuta LocalStack, Terraform, Trivy ni ZAP. Sus evidencias son históricas. Render Free puede suspender el servicio por inactividad y tardar aproximadamente un minuto en iniciarlo de nuevo; también tiene cuotas de uso.
+
 ## Iniciar la página y la API
 
 En PowerShell, con Node.js instalado:
@@ -56,6 +64,8 @@ node pruebas-sitio.cjs
 
 Comprueba la API y ejecuta el JavaScript real de la página con un DOM mínimo. Genera un informe nuevo en `Reportes/Nuevas/`, sin imprimir ni guardar claves o tokens. La prueba histórica `pruebas-jwt.js` se conserva y evita sobrescribir su reporte original.
 
+Para comprobar además la preparación de Render, desde `API/` ejecuta `node pruebas-render.cjs`. Esta suite inicia y detiene servidores de prueba locales con claves temporales, ejecuta la regresión local y emula la configuración de Render. No crea servicios cloud ni necesita que la API principal esté activa.
+
 ## Iniciar LocalStack y Terraform
 
 Inicia Docker Desktop con el motor Linux. Desde la raíz del proyecto:
@@ -92,6 +102,7 @@ Revisa el plan antes de confirmar `apply`. Las credenciales AWS `test` son ficti
 | [Reportes](Reportes/README.md) | Resultados propios, antecedentes y comprobaciones nuevas |
 | [Diagrama](Diagrama/) y [Documento](Documento/) | Diagramas editables, PNG e informes académicos |
 | [docs](docs/) | Ejecución detallada y revisión de los archivos publicables |
+| [render.yaml](render.yaml) | Preparación de un único servicio web Free, sin despliegues automáticos |
 
 Se conservan las carpetas originales para mantener válidas las rutas del laboratorio y de los documentos. Los scripts ZAP originales están preparados para `D:\Actividad3_Ciberseguridad`.
 
@@ -104,6 +115,7 @@ El diagrama registra la arquitectura del 8 de noviembre. La página añadida uti
 - **Históricos:** 10/10 pruebas JWT; tres contextos válidos de ZAP con cero alertas HTTP/JSON; S3 con AES256 y cuatro bloqueos públicos; configuración IAM consultada.
 - **Trivy final:** Node 24 Trixie, cero críticos, 54 altos, 87 medios y 62 bajos. Se conservan los análisis de Node 14 y Node 18.
 - **Página y API, 10 de noviembre de 2026:** 44 pruebas correctas: 31 de HTTP real, 8 del cliente con API real y 5 simuladas. Se revisó la página en computadora y celular.
+- **Preparación de Render:** 47 pruebas de regresión local y 43 de adaptación correctas. Se emuló Render en Windows; estos resultados no acreditan un despliegue ni una revisión visual nueva en navegador. Consulta el [reporte 19](Reportes/19_Preparacion_Render.json).
 
 Los informes completos, fechas y alcance están en [Reportes](Reportes/README.md). Las pruebas nuevas no acreditan una nueva ejecución de Terraform, LocalStack, Trivy o ZAP.
 

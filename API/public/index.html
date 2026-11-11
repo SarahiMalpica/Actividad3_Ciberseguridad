@@ -4,9 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Consulta una API local con JWT y revisa las evidencias del laboratorio de ciberseguridad.">
+  <meta name="description" content="Consulta la API con JWT y revisa las evidencias del laboratorio de ciberseguridad.">
   <title>Actividad 3 · Laboratorio de ciberseguridad</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="configuracion.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
       <a class="nav-primary" href="#explorador">Consultas</a>
       <a href="#evidencias">Evidencias y límites</a>
     </nav>
-    <p class="environment">Laboratorio local<small>Windows · LocalStack<br>Sin una cuenta real de AWS</small></p>
+    <p class="environment"><span id="entorno-titulo">Laboratorio local</span><small id="entorno-detalle">Windows · LocalStack<br>Sin una cuenta real de AWS</small></p>
   </aside>
 
   <main id="contenido">
@@ -31,11 +32,15 @@
           <span class="status-dot" aria-hidden="true"></span><div><strong id="estado-titulo">Sin consultar</strong><small id="estado-detalle">Selecciona un recurso</small></div>
         </div>
       </header>
-      <p id="aviso-api" class="notice" role="note">Abre http://127.0.0.1:3000/ con JavaScript activado para consultar la API.</p>
+      <p id="aviso-api" class="notice" role="note">Activa JavaScript y abre la página desde su servidor para consultar la API.</p>
 
       <div class="workbench">
         <section class="panel request-panel" aria-labelledby="token-titulo">
           <h2 id="token-titulo">Consultar recurso</h2>
+          <div id="modo-demo" class="demo-tools" hidden>
+            <p>Roles públicos de prueba · datos simulados · JWT de 5 minutos.</p>
+            <div><button id="demo-usuario" class="button" type="button" disabled>Usar usuario</button><button id="demo-admin" class="button" type="button" disabled>Usar administrador</button></div>
+          </div>
           <label for="jwt-token">JWT de laboratorio <span>(opcional)</span></label>
           <div class="token-row">
             <input id="jwt-token" type="password" autocomplete="off" spellcheck="false" autocapitalize="none" placeholder="Pega el JWT, sin Bearer" aria-describedby="token-ayuda" disabled>

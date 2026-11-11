@@ -1,0 +1,238 @@
+{
+  "fecha": "2026-11-11T05:16:55.015Z",
+  "node": "v24.13.0",
+  "alcance": "Preparacion de Render emulada en Windows con HTTP local y DOM minimo; no es un despliegue ni verifica TLS o cuotas de Render. No se ejecutan LocalStack, Terraform, Trivy o ZAP.",
+  "regresionLocal": {
+    "total": 47,
+    "correctas": 47,
+    "fallidas": 0
+  },
+  "total": 43,
+  "correctas": 43,
+  "fallidas": 0,
+  "archivos": {
+    "index.js": "be2d6b6d3a802510c79384495de1f38fa0abc659713a06b991724182dfe27dfd",
+    "configuracion-servidor.cjs": "9fadd8fff9594cd1242c540c5d9936ebdcb26ded3c33de9fa0cabbe12ad51159",
+    "public/app.js": "9ad77ea363ff9a54fc743b6cc7762147dec5ad35b5ed5e81faeb6c9a58c1b3e7",
+    "public/index.html": "351005711b5464289d318ffc00854684afa60804bba642a62bc0dc3b7677df30",
+    "public/styles.css": "6ac484614925330bb01f4b927956d4d8818e33cc0a3521b53ebeebb2e597bf90",
+    "../render.yaml": "057a6fab39764b2b4b01b1128e639d34cd39f9820bccf0ab3a06040ae1576ca3"
+  },
+  "resultados": [
+    {
+      "capa": "Configuracion",
+      "caso": "Windows conserva loopback y puerto 3000, demo desactivada",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Render utiliza todas las interfaces y el puerto asignado",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Cada instancia de demo obtiene una clave diferente",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Rechazar puerto invalido 0",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Rechazar puerto invalido -1",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Rechazar puerto invalido 65536",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Rechazar puerto invalido abc",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Rechazar puerto invalido 3000x",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Rechazar origen con protocolo, ruta o credenciales incorrectos: http://sitio.invalid",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Rechazar origen con protocolo, ruta o credenciales incorrectos: https://sitio.invalid/ruta",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Rechazar origen con protocolo, ruta o credenciales incorrectos: https://sitio.invalid/?token=x",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Rechazar origen con protocolo, ruta o credenciales incorrectos: https://sitio.invalid",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Rechazar origen con protocolo, ruta o credenciales incorrectos: https://sitio.invalid/#x",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Demo requiere un origen HTTPS configurado",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Windows no genera automaticamente una clave de laboratorio",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Un Render sin modo demo exige una clave explicita",
+      "correcto": true
+    },
+    {
+      "capa": "Configuracion",
+      "caso": "Una clave explicita incorrecta no activa la generacion automatica",
+      "correcto": true
+    },
+    {
+      "capa": "Regresion local",
+      "caso": "Ejecutar la suite del sitio contra un servidor aislado",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Estado publico disponible",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Configuracion publica habilita solo origenes previstos y no contiene secretos",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "JWT temporal usuario emitido en servidor",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "JWT temporal admin emitido en servidor",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "usuario en /api/perfil: 200",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "usuario en /api/admin: 403",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "admin en /api/perfil: 200",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "admin en /api/admin: 200",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Sin JWT se mantiene 401 en recursos protegidos",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "JWT del laboratorio no sirve en la instancia publica",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Emision rechazada: Origen ajeno",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Emision rechazada: Sin origen",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Emision rechazada: Tipo incorrecto",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Emision rechazada: JSON mal formado",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Emision rechazada: Cuerpo demasiado grande",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Emision rechazada: Rol inexistente",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Emision rechazada: Parametros adicionales",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Emision rechazada: Lista en vez de objeto",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Archivos privados y metodo GET de emision no se publican",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTP real local",
+      "caso": "Boton usuario carga JWT en memoria, muestra 200 y comprueba 403",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTP real local",
+      "caso": "Boton admin permite 200 y salir elimina el JWT",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente simulado",
+      "caso": "Una copia en un origen ajeno no habilita roles ni solicitudes",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente simulado",
+      "caso": "Una emision tardia no restaura el token despues de borrarlo",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente simulado",
+      "caso": "Fallo al emitir JWT muestra aviso y permite reintentar",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP modo Render emulado",
+      "caso": "Emision limitada a 60 tokens por minuto por instancia",
+      "correcto": true
+    }
+  ]
+}

@@ -30,3 +30,7 @@ Los informes generados después de esta revisión quedan en `Reportes/Nuevas/` y
 Durante la revisión inicial no había un repositorio Git local en la carpeta original ni archivos rastreados que retirar. Se confirmó la sesión autenticada de `SarahiMalpica` y la ausencia del repositorio de destino. Con autorización se creó el repositorio público [Actividad3_Ciberseguridad](https://github.com/SarahiMalpica/Actividad3_Ciberseguridad), sin historial previo.
 
 La selección publicable se mantiene en `C:\Users\sarah\Documents\ChatGPT\CIBERSEGURIDAD\Actividad3_Ciberseguridad`. Antes del commit se comparó con la carpeta original de `D:` y se revisaron los archivos preparados para Git. El laboratorio y sus archivos privados permanecen en `D:\Actividad3_Ciberseguridad`; la publicación contiene únicamente la selección revisada.
+
+## Adaptación posterior para Render
+
+El commit inicial de GitHub conserva la página local. La adaptación posterior añade configuración del servidor, botones y emisión de JWT solo en modo demo, pruebas reproducibles y `render.yaml` con el plan Free. La adaptación se publica como un commit posterior que conserva el historial; tener estos archivos en GitHub no implica que la demo esté desplegada. El [reporte 19](../Reportes/19_Preparacion_Render.json) acredita pruebas locales. La [guía de Render](RENDER.md) describe la separación de claves y las verificaciones pendientes antes de anunciar un enlace público.

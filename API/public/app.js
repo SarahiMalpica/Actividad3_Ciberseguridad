@@ -16,6 +16,10 @@
   const estadoTitulo = buscar('estado-titulo');
   const estadoDetalle = buscar('estado-detalle');
   const aviso = buscar('aviso-api');
+  const configuracion = window.ACTIVIDAD3_CONFIG;
+  const demoPublica = configuracion?.demoPublica === true;
+  const panelDemo = buscar('modo-demo');
+  const botonesDemo = [buscar('demo-usuario'), buscar('demo-admin')];
   const recursos = [
     { ruta: '/health', boton: buscar('consultar-estado') },
     { ruta: '/api/perfil', boton: buscar('consultar-perfil') },
@@ -54,6 +58,7 @@
       recurso.boton.setAttribute('aria-busy', String(seleccionado));
       recurso.etiqueta.textContent = seleccionado ? 'Consultando…' : recurso.texto;
     }
+    for (const boton of botonesDemo) boton.disabled = !habilitado || !demoPublica || enCurso;
   }
 
   function cancelarConsulta() {
@@ -109,7 +114,7 @@
       return 'El servidor no encontró esta ruta. Comprueba que está en ejecución la versión de la API que contiene /health, /api/perfil y /api/admin.';
     }
     if (codigo >= 500) {
-      return 'La API respondió con un error del servidor. Revisa su consola local; este resultado no comprueba el estado de LocalStack.';
+      return 'La API respondió con un error del servidor. Este resultado no comprueba el estado de LocalStack.';
     }
     if (codigo === 200 && ruta === '/health' && cuerpo && cuerpo.estado === 'ok') {
       return 'La API está disponible. Esta consulta no verifica S3, IAM ni LocalStack.';
@@ -145,7 +150,7 @@
     origenResultado.textContent = 'Consulta en curso';
     formatoResultado.textContent = 'Respuesta JSON';
     jsonResultado.textContent = 'Esperando la respuesta del servidor…';
-    explicacion.textContent = 'Consultando la API local. Puedes borrar o cambiar el token para cancelar esta solicitud.';
+    explicacion.textContent = 'Consultando la API. Puedes borrar o cambiar el token para cancelar esta solicitud.';
     mostrarEstado('carga', 'Consultando…', 'GET ' + recurso.ruta);
 
     try {
@@ -203,8 +208,8 @@
         ? 'Se recibió una respuesta HTTP, pero no se pudo leer su contenido completo.'
         : 'No se recibió una respuesta JSON del servidor.';
       explicacion.textContent = tiempoAgotado
-        ? 'La consulta superó los 8 segundos de espera. Comprueba que la API está en ejecución en 127.0.0.1:3000 y vuelve a intentarlo.'
-        : 'No se pudo completar la consulta a la API. El servidor puede estar desconectado o la conexión puede haberse interrumpido. Comprueba su consola local y vuelve a intentarlo.';
+        ? 'La consulta superó los 8 segundos de espera. El servidor puede estar iniciándose; espera y vuelve a intentarlo.'
+        : 'No se pudo completar la consulta a la API. El servidor puede estar desconectado o la conexión puede haberse interrumpido. Vuelve a intentarlo.';
       mostrarEstado('error', 'Sin respuesta completa', 'Último intento · ' + hora);
     } finally {
       clearTimeout(temporizador);
@@ -215,11 +220,67 @@
     }
   }
 
-  // Solo enviar JWT a la API local prevista, nunca al abrir una copia en otro sitio.
-  const origenesLocales = ['http://127.0.0.1:3000', 'http://localhost:3000'];
-  if (!origenesLocales.includes(window.location.origin)) {
+  async function usarRolDemo(rol) {
+    if (!habilitado || !demoPublica || ocupado) return;
+    borrarToken(false);
+    const solicitud = ++numeroSolicitud;
+    const controlador = new AbortController();
+    controladorActivo = controlador;
+    const temporizador = setTimeout(() => controlador.abort(), 8000);
+    cambiarCarga(true);
+    rutaResultado.textContent = 'POST /api/demo/token';
+    httpResultado.textContent = 'Esperando…';
+    httpResultado.dataset.state = 'pendiente';
+    origenResultado.textContent = 'Consulta en curso';
+    formatoResultado.textContent = 'Respuesta JSON · JWT oculto';
+    jsonResultado.textContent = 'Solicitando un JWT temporal de prueba…';
+    explicacion.textContent = 'Solo habilita datos simulados de esta demo pública.';
+    mostrarEstado('carga', 'Consultando…', 'JWT de prueba');
+    let respuesta;
+    try {
+      respuesta = await fetch('/api/demo/token', {
+        method: 'POST', headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rol }), credentials: 'omit', mode: 'same-origin', redirect: 'error',
+        cache: 'no-store', referrerPolicy: 'same-origin', signal: controlador.signal
+      });
+      const cuerpo = await respuesta.json();
+      if (solicitud !== numeroSolicitud) return;
+      httpResultado.textContent = String(respuesta.status);
+      origenResultado.textContent = 'En vivo · ' + horaActual();
+      httpResultado.dataset.state = respuesta.ok ? 'exito' : 'error';
+      if (!respuesta.ok) {
+        jsonResultado.textContent = JSON.stringify({ error: cuerpo.error || 'No se pudo obtener un JWT de prueba.' }, null, 2);
+        explicacion.textContent = respuesta.status === 429 ? 'Espera un minuto antes de pedir otro token de prueba.' : 'No se obtuvo un JWT. Inténtalo de nuevo.';
+      } else {
+        if (typeof cuerpo.token !== 'string' || cuerpo.rol !== rol || cuerpo.demostracion !== true || cuerpo.duracionSegundos !== 300) {
+          throw new Error('Respuesta de demostracion inesperada.');
+        }
+        tokenEnMemoria = cuerpo.token;
+        campoToken.value = cuerpo.token;
+        ayudaToken.textContent = 'JWT de prueba (' + rol + ') en memoria. Vence en cinco minutos.';
+        jsonResultado.textContent = JSON.stringify({ rol: cuerpo.rol, duracionSegundos: cuerpo.duracionSegundos, demostracion: true }, null, 2);
+        explicacion.textContent = 'JWT cargado en el campo protegido. Consulta el perfil o administración para comprobar los permisos.';
+      }
+      mostrarEstado('responde', 'Responde por HTTP', 'HTTP ' + respuesta.status);
+    } catch {
+      if (solicitud !== numeroSolicitud) return;
+      httpResultado.textContent = respuesta ? String(respuesta.status) : 'Sin respuesta';
+      httpResultado.dataset.state = 'error';
+      origenResultado.textContent = 'Intento en vivo · ' + horaActual();
+      jsonResultado.textContent = 'No se obtuvo un JWT de prueba válido.';
+      explicacion.textContent = 'El servidor puede estar iniciándose o desconectado. Espera y vuelve a intentarlo.';
+      mostrarEstado('error', 'Sin JWT de prueba', 'Vuelve a intentarlo');
+    } finally {
+      clearTimeout(temporizador);
+      if (solicitud === numeroSolicitud) { controladorActivo = null; cambiarCarga(false); }
+    }
+  }
+
+  // El servidor declara sus origenes exactos; las copias en otros sitios quedan desactivadas.
+  if (!configuracion || !Array.isArray(configuracion.origenesPermitidos) ||
+      !configuracion.origenesPermitidos.includes(window.location.origin)) {
     campoToken.value = '';
-    aviso.textContent = 'Abre http://127.0.0.1:3000/ con la API en ejecución. En esta ubicación no se aceptan tokens ni se envían solicitudes.';
+    aviso.textContent = 'Abre la dirección del servidor del laboratorio o de su demo. En esta ubicación no se aceptan tokens ni se envían solicitudes.';
     return;
   }
 
@@ -228,7 +289,16 @@
   campoToken.disabled = false;
   botonBorrar.disabled = false;
   cambiarCarga(false);
-  aviso.textContent = 'Consultas en vivo. Sin JWT, las rutas protegidas responden 401.';
+  panelDemo.hidden = !demoPublica;
+  aviso.textContent = demoPublica
+    ? 'Demo pública: roles de prueba y datos simulados. Las consultas a la API son en vivo; las evidencias son históricas.'
+    : 'Consultas en vivo. Sin JWT, las rutas protegidas responden 401.';
+  if (demoPublica) {
+    buscar('entorno-titulo').textContent = 'Demo pública';
+    buscar('entorno-detalle').textContent = 'API en línea · datos simulados. LocalStack y Terraform se ejecutan aparte.';
+    botonesDemo[0].addEventListener('click', () => usarRolDemo('usuario'));
+    botonesDemo[1].addEventListener('click', () => usarRolDemo('admin'));
+  }
 
   for (const recurso of recursos) {
     recurso.boton.addEventListener('click', () => consultar(recurso));
