@@ -1,0 +1,102 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Actividad 3 - API local con JWT",
+    "version": "1.0.0",
+    "description": "Laboratorio local con datos simulados y tokens emitidos mediante un script de prueba."
+  },
+  "servers": [{"url": "http://127.0.0.1:3000"}],
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "consultarEstado",
+        "summary": "Comprobar que la API responde",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Servicio disponible.",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Estado"}}}
+          },
+          "500": {"$ref": "#/components/responses/ErrorInterno"}
+        }
+      }
+    },
+    "/api/perfil": {
+      "get": {
+        "operationId": "consultarPerfil",
+        "summary": "Consultar el perfil del usuario autenticado",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Datos simulados del usuario autenticado.",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DatosProtegidos"}}}
+          },
+          "401": {"$ref": "#/components/responses/NoAutenticado"},
+          "500": {"$ref": "#/components/responses/ErrorInterno"}
+        }
+      }
+    },
+    "/api/admin": {
+      "get": {
+        "operationId": "consultarAdministracion",
+        "summary": "Consultar datos administrativos simulados",
+        "description": "Requiere un JWT valido y vigente con el rol admin.",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Acceso autorizado para el administrador.",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DatosProtegidos"}}}
+          },
+          "401": {"$ref": "#/components/responses/NoAutenticado"},
+          "403": {"$ref": "#/components/responses/SinPermiso"},
+          "500": {"$ref": "#/components/responses/ErrorInterno"}
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Estado": {
+        "type": "object",
+        "required": ["estado"],
+        "properties": {"estado": {"type": "string", "enum": ["ok"]}}
+      },
+      "DatosProtegidos": {
+        "type": "object",
+        "required": ["usuario", "rol", "datos"],
+        "properties": {
+          "usuario": {"type": "string"},
+          "rol": {"type": "string", "enum": ["usuario", "admin"]},
+          "datos": {"type": "string"}
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {"error": {"type": "string"}}
+      }
+    },
+    "responses": {
+      "NoAutenticado": {
+        "description": "Token ausente, invalido o vencido.",
+        "headers": {"WWW-Authenticate": {"schema": {"type": "string"}}},
+        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+      },
+      "SinPermiso": {
+        "description": "Usuario autenticado que carece del rol admin.",
+        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+      },
+      "ErrorInterno": {
+        "description": "Error interno del servicio.",
+        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}
+      }
+    }
+  }
+}

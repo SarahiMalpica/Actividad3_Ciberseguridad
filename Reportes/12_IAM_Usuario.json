@@ -1,0 +1,9 @@
+{
+    "User": {
+        "Path": "/",
+        "UserName": "operador-actividad3",
+        "UserId": "AIDAQAAAAAAAPHL4MG4ZY",
+        "Arn": "arn:aws:iam::000000000000:user/operador-actividad3",
+        "CreateDate": "2026-11-08T23:47:36.413592+00:00"
+    }
+}

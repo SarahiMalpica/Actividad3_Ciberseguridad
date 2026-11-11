@@ -1,0 +1,58 @@
+# Credenciales y configuracion privada
+.env
+.env.*
+!.env.example
+!.env.template
+.aws/
+.ssh/
+credentials
+credentials.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.jwt
+*token*.txt
+*token*.json
+*secret*.txt
+
+# Dependencias, herramientas y sesiones locales
+node_modules/
+Herramientas/
+.npm/
+NpmCache/
+ReportesPrivados/
+plan-temporal-*.yaml
+.codex/
+.agents/
+Revisiones/
+Verificaciones/
+
+# Terraform: conservar .terraform.lock.hcl
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.plan
+*.tfvars
+*.tfvars.json
+.terraform.tfstate.lock.info
+crash.log
+crash.*.log
+
+# Resultados nuevos pendientes de revision; los reportes historicos se conservan
+Reportes/Nuevas/
+
+# Respaldos, archivos duplicados y temporales
+*.bak
+*.backup
+*.tmp
+*.temp
+*.log
+*.swp
+*~
+*.zip
+.DS_Store
+Thumbs.db
+desktop.ini

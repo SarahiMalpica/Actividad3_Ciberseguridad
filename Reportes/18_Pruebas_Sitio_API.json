@@ -1,0 +1,242 @@
+{
+  "inicio": "2026-11-11T01:37:23.375Z",
+  "fin": "2026-11-11T01:37:31.585Z",
+  "servidor": "http://127.0.0.1:3000",
+  "node": "v24.13.0",
+  "dependencias": {
+    "express": "5.3.0",
+    "jsonwebtoken": "9.0.3"
+  },
+  "archivos": {
+    "index.js": "fce67b11aa18d7af69a70e7510ff84698eabdef301af6b0b8139b6aa7526b622",
+    "public/index.html": "423012d69f0659910a2082881802bc86c3a98841914b4a5b0164367f921be83c",
+    "public/styles.css": "f35fca54ca6f3a13ffe50ede3f2da48a5331958a18fabd51fd92926e66d04e3a",
+    "public/app.js": "c1d91921c48352e206ec43051ac31ee7c6ed5ea4ba5cc761d61ed95aff9dbb03"
+  },
+  "alcance": "API real en Windows; JavaScript real del sitio ejecutado con DOM minimo. Las pruebas de desconexion, timeout, respuesta tardia y no JSON son simuladas. No verifica maquetacion, CSP en navegador ni LocalStack.",
+  "total": 44,
+  "correctas": 44,
+  "fallidas": 0,
+  "resultados": [
+    {
+      "capa": "HTTP real",
+      "caso": "Estado publico",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Perfil sin token",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Admin sin token",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Perfil firma invalida",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Admin firma invalida",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Perfil token vencido",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Admin token vencido",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Perfil usuario",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Admin sin permiso",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Admin autorizado",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Perfil administrador",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Token sin vencimiento",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Emisor incorrecto",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Destinatario incorrecto",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Algoritmo no permitido",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Rol no permitido",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Cabecera mal formada",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Archivo publico /",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Archivo publico /index.html",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Archivo publico /styles.css",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "Archivo publico /app.js",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "No publicar /.env",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "No publicar /index.js",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "No publicar /package.json",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "No publicar /package-lock.json",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "No publicar /node_modules/express/package.json",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "No publicar /pruebas-jwt.js",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "No publicar /ejecutar-zap-jwt.js",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "No publicar /%2e%2e%2f.env",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "No publicar /ruta-inexistente",
+      "correcto": true
+    },
+    {
+      "capa": "HTTP real",
+      "caso": "HEAD de pagina publica",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTP real",
+      "caso": "Estado y carga sin enviar JWT a health",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTP real",
+      "caso": "Perfil y admin sin token muestran 401",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTP real",
+      "caso": "Botones con token usuario",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTP real",
+      "caso": "Botones con token administrador",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTP real",
+      "caso": "Botones con token invalido",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTP real",
+      "caso": "Botones con token vencido",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTP real",
+      "caso": "Borrar token limpia el campo, resultado y autenticacion",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTP real",
+      "caso": "Salir y restaurar pagina elimina JWT y resultados",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente simulado",
+      "caso": "Desconexion devuelve aviso y rehabilita botones",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente simulado",
+      "caso": "Espera de 8 segundos cancela la solicitud",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente simulado",
+      "caso": "Una respuesta tardia no reaparece tras borrar token",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente simulado",
+      "caso": "Origen distinto del laboratorio mantiene controles desactivados",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente simulado",
+      "caso": "Respuesta no JSON se muestra como texto",
+      "correcto": true
+    }
+  ]
+}

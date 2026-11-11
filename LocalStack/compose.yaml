@@ -1,0 +1,10 @@
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: actividad3-localstack
+    ports:
+      - "127.0.0.1:4566:4566"
+    environment:
+      LOCALSTACK_AUTH_TOKEN: "${LOCALSTACK_AUTH_TOKEN:?Falta configurar el token privado}"
+      SERVICES: "s3,iam,sts,s3control"
+      DEBUG: "0"

@@ -1,0 +1,15 @@
+{
+    "fechaUTC":  "2026-11-09T00:03:05.0790564Z",
+    "endpoint":  "http://127.0.0.1:4566",
+    "rol":  "rol-lectura-actividad3",
+    "politicaArn":  "arn:aws:iam::000000000000:policy/PoliticaLecturaActividad3",
+    "codigoAsociacion":  0,
+    "consulta":  {
+                     "AttachedPolicies":  [
+                                              {
+                                                  "PolicyName":  "PoliticaLecturaActividad3",
+                                                  "PolicyArn":  "arn:aws:iam::000000000000:policy/PoliticaLecturaActividad3"
+                                              }
+                                          ]
+                 }
+}

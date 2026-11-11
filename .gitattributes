@@ -1,0 +1,3 @@
+# Conservar los bytes de las evidencias y de los planes ZAP verificados por SHA-256.
+# Evita que core.autocrlf cambie sus huellas al subir o clonar desde Windows.
+* -text

@@ -1,0 +1,64 @@
+env:
+  contexts:
+    - name: API-local-sin-token
+      urls:
+        - 'http://127.0.0.1:3000'
+      includePaths:
+        - '^http://127[.]0[.]0[.]1:3000/.*$'
+  parameters:
+    failOnError: true
+    failOnWarning: true
+    continueOnFailure: false
+    progressToStdout: true
+
+jobs:
+  - type: requestor
+    requests:
+      - url: 'http://127.0.0.1:3000/health'
+        method: GET
+        responseCode: 200
+      - url: 'http://127.0.0.1:3000/api/perfil'
+        method: GET
+        responseCode: 401
+      - url: 'http://127.0.0.1:3000/api/admin'
+        method: GET
+        responseCode: 401
+
+  - type: openapi
+    parameters:
+      apiFile: 'D:/Actividad3_Ciberseguridad/ZAP/api-local.openapi.json'
+      context: API-local-sin-token
+      targetUrl: 'http://127.0.0.1:3000'
+
+  - type: activeScan
+    parameters:
+      context: API-local-sin-token
+      maxRuleDurationInMins: 1
+      maxScanDurationInMins: 5
+      addQueryParam: true
+      scanHeadersAllRequests: true
+      threadPerHost: 2
+      delayInMs: 20
+    policyDefinition:
+      defaultStrength: Medium
+      defaultThreshold: Medium
+
+  - type: passiveScan-wait
+    parameters:
+      maxDuration: 3
+
+  - type: report
+    parameters:
+      template: traditional-html
+      reportDir: 'D:/Actividad3_Ciberseguridad/Reportes/ZAP'
+      reportFile: '08_ZAP_sin_autenticacion.html'
+      reportTitle: 'Actividad 3 - ZAP sin autenticacion'
+      displayReport: false
+
+  - type: report
+    parameters:
+      template: traditional-json
+      reportDir: 'D:/Actividad3_Ciberseguridad/Reportes/ZAP'
+      reportFile: '08_ZAP_sin_autenticacion.json'
+      reportTitle: 'Actividad 3 - ZAP sin autenticacion'
+      displayReport: false

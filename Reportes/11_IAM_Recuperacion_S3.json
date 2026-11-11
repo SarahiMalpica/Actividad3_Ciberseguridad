@@ -1,0 +1,30 @@
+{
+    "fechaUTC":  "2026-11-08T23:36:35.7859590Z",
+    "endpoint":  "http://127.0.0.1:4566",
+    "bucket":  "actividad3-seguro-2024",
+    "cifrado":  {
+                    "ServerSideEncryptionConfiguration":  {
+                                                              "Rules":  [
+                                                                            {
+                                                                                "ApplyServerSideEncryptionByDefault":  {
+                                                                                                                           "SSEAlgorithm":  "AES256"
+                                                                                                                       },
+                                                                                "BucketKeyEnabled":  false,
+                                                                                "BlockedEncryptionTypes":  {
+                                                                                                               "EncryptionType":  [
+                                                                                                                                      "SSE-C"
+                                                                                                                                  ]
+                                                                                                           }
+                                                                            }
+                                                                        ]
+                                                          }
+                },
+    "bloqueoPublico":  {
+                           "PublicAccessBlockConfiguration":  {
+                                                                  "BlockPublicAcls":  true,
+                                                                  "IgnorePublicAcls":  true,
+                                                                  "BlockPublicPolicy":  true,
+                                                                  "RestrictPublicBuckets":  true
+                                                              }
+                       }
+}

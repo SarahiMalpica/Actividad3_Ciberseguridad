@@ -1,0 +1,22 @@
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "rol-lectura-actividad3",
+        "RoleId": "AROAQAAAAAAAO34TK4P5P",
+        "Arn": "arn:aws:iam::000000000000:role/rol-lectura-actividad3",
+        "CreateDate": "2026-11-08T23:50:41.342640+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "ConfiarSoloOperadorLocal",
+                    "Effect": "Allow",
+                    "Principal": {
+                        "AWS": "arn:aws:iam::000000000000:user/operador-actividad3"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        }
+    }
+}

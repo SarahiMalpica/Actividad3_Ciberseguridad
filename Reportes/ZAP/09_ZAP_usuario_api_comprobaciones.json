@@ -1,0 +1,43 @@
+{
+  "rol": "usuario",
+  "inicio": "2026-11-08T22:14:24.817Z",
+  "fin": "2026-11-08T22:14:34.929Z",
+  "analisisCompletado": false,
+  "codigoZap": 2,
+  "comprobaciones": [
+    {
+      "momento": "antes",
+      "ruta": "/health",
+      "esperado": 200,
+      "obtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    },
+    {
+      "momento": "antes",
+      "ruta": "/api/perfil",
+      "esperado": 200,
+      "obtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    },
+    {
+      "momento": "antes",
+      "ruta": "/api/admin",
+      "esperado": 403,
+      "obtenido": 403,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    }
+  ],
+  "caducidadTokenSegundos": 1200,
+  "alcance": "http://127.0.0.1:3000",
+  "reglaDomXssExcluida": 40026,
+  "clientIntegration": "desactivado; se conservan avisos de dependencias",
+  "copiasCompartibles": "Solo credenciales redactadas; hallazgos y contadores conservados.",
+  "redacciones": 0,
+  "indexJsSha256": "ba32c49181281d8a42a118c7ef8475c524e3da84be521d3e416d6c0fa9320b44",
+  "politicaSha256": "571ced767aa61897f6ae11ff0acf643f8e4c13161ec13bfdcb372340d4e1ed4e",
+  "ejecutorSha256": "720546b2bea4d163d9180664389c5623be0eb4d78ae3af1bcbe3258768288536",
+  "error": "ZAP no termino correctamente. Revisa la consola compartible."
+}

@@ -1,0 +1,23 @@
+ACTIVIDAD 3 - ANALISIS AUTENTICADOS DE API LOCAL
+
+Contenido: API/ejecutar-zap-jwt.js y ZAP/plan-usuario-api.yaml, ZAP/plan-admin-api.yaml.
+Destino al extraer: D:\Actividad3_Ciberseguridad.
+Sigue el paso actual del chat para extraer, comprobar y ejecutar.
+
+Los planes contienen un marcador de variable, nunca un token real.
+El ejecutor usa HS256 con Node y el secreto local que recibe mediante --env-file,
+emite un JWT de laboratorio de veinte minutos y lo pasa solo al proceso ZAP.
+El secreto de firma se elimina del entorno del proceso ZAP.
+La validacion de los planes utiliza un marcador sin emitir JWT real.
+
+Los originales autenticados se guardan en ReportesPrivados dentro del home de cada rol.
+Los archivos para compartir son los de D:\Actividad3_Ciberseguridad\Reportes\ZAP.
+Se redactan credenciales, conservando alertas, riesgos, instancias y contadores.
+El resumen JSON registra comprobaciones HTTP y avisos de la ejecucion.
+
+Alcance: tres rutas HTTP/JSON en http://127.0.0.1:3000.
+DOM XSS 40026 se excluye por no existir interfaz HTML; Client Integration esta desactivado.
+Los avisos de extensiones dependientes se conservan. Un resultado sin alertas
+no prueba ausencia de vulnerabilidades ni cobertura exhaustiva.
+
+Este paquete no incluye .env, credenciales reales, dependencias npm, Java, ZAP ni reportes de analisis.

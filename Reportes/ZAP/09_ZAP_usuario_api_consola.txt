@@ -1,0 +1,6 @@
+Automation plan warnings:
+	Difference in response code values for message GET http://127.0.0.1:3000/api/perfil Expected : 200 Received : 401
+	Difference in response code values for message GET http://127.0.0.1:3000/api/admin Expected : 403 Received : 401
+
+
+Codigo de salida de ZAP: 2

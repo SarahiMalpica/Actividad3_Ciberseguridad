@@ -1,0 +1,67 @@
+{
+  "rol": "admin",
+  "inicio": "2026-11-08T22:53:12.577Z",
+  "fin": "2026-11-08T22:54:00.181Z",
+  "analisisCompletado": true,
+  "codigoZap": 0,
+  "comprobaciones": [
+    {
+      "momento": "antes",
+      "ruta": "/health",
+      "esperado": 200,
+      "obtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    },
+    {
+      "momento": "antes",
+      "ruta": "/api/perfil",
+      "esperado": 200,
+      "obtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    },
+    {
+      "momento": "antes",
+      "ruta": "/api/admin",
+      "esperado": 200,
+      "obtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    },
+    {
+      "momento": "despues",
+      "ruta": "/health",
+      "esperado": 200,
+      "obtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    },
+    {
+      "momento": "despues",
+      "ruta": "/api/perfil",
+      "esperado": 200,
+      "obtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    },
+    {
+      "momento": "despues",
+      "ruta": "/api/admin",
+      "esperado": 200,
+      "obtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    }
+  ],
+  "caducidadTokenSegundos": 1200,
+  "alcance": "http://127.0.0.1:3000",
+  "reglaDomXssExcluida": 40026,
+  "clientIntegration": "desactivado; se conservan avisos de dependencias",
+  "copiasCompartibles": "Solo credenciales redactadas; hallazgos y contadores conservados.",
+  "redacciones": 0,
+  "indexJsSha256": "ba32c49181281d8a42a118c7ef8475c524e3da84be521d3e416d6c0fa9320b44",
+  "politicaSha256": "3e38f763fdd38c69713954592bc1f583ff19d590092f94beefd16539b49ab3bf",
+  "ejecutorSha256": "76c4745d2e854b5a72bf0115492de94a4b6d1ec1752471cd8adee0f4e6c19145",
+  "error": null
+}

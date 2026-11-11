@@ -1,0 +1,32 @@
+{
+  "fechaUTC": "2026-11-09T00:17:15.4014031Z",
+  "endpoint": "http://127.0.0.1:4566",
+  "rol": "rol-lectura-actividad3",
+  "consultaRol": {
+    "Role": {
+        "Path": "/",
+        "RoleName": "rol-lectura-actividad3",
+        "RoleId": "AROAQAAAAAAAO34TK4P5P",
+        "Arn": "arn:aws:iam::000000000000:role/rol-lectura-actividad3",
+        "CreateDate": "2026-11-08T23:50:41.342640+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "ConfiarSoloOperadorLocal",
+                    "Effect": "Allow",
+                    "Principal": {
+                        "AWS": "arn:aws:iam::000000000000:user/operador-actividad3"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        },
+        "MaxSessionDuration": 3600,
+        "RoleLastUsed": {}
+    }
+},
+  "consultaInline": {
+    "PolicyNames": []
+}
+}

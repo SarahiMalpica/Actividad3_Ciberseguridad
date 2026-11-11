@@ -1,0 +1,4 @@
+Automation plan succeeded!
+
+
+Codigo de salida de ZAP: 0

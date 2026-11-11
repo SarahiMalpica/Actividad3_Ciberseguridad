@@ -1,0 +1,115 @@
+{
+  "fechaUTC": "2026-11-08T03:19:18.644Z",
+  "servidor": "http://127.0.0.1:3000",
+  "node": "v24.13.0",
+  "dependenciasDeclaradas": {
+    "express": "5.3.0",
+    "jsonwebtoken": "9.0.3"
+  },
+  "sha256CodigoAPI": "ba32c49181281d8a42a118c7ef8475c524e3da84be521d3e416d6c0fa9320b44",
+  "total": 10,
+  "correctas": 10,
+  "fallidas": 0,
+  "resultados": [
+    {
+      "caso": "Perfil sin token",
+      "ruta": "/api/perfil",
+      "httpEsperado": 401,
+      "httpObtenido": 401,
+      "cuerpoCorrecto": true,
+      "cabeceraCorrecta": true,
+      "correcto": true,
+      "detalle": ""
+    },
+    {
+      "caso": "Admin sin token",
+      "ruta": "/api/admin",
+      "httpEsperado": 401,
+      "httpObtenido": 401,
+      "cuerpoCorrecto": true,
+      "cabeceraCorrecta": true,
+      "correcto": true,
+      "detalle": ""
+    },
+    {
+      "caso": "Perfil firma invalida",
+      "ruta": "/api/perfil",
+      "httpEsperado": 401,
+      "httpObtenido": 401,
+      "cuerpoCorrecto": true,
+      "cabeceraCorrecta": true,
+      "correcto": true,
+      "detalle": ""
+    },
+    {
+      "caso": "Admin firma invalida",
+      "ruta": "/api/admin",
+      "httpEsperado": 401,
+      "httpObtenido": 401,
+      "cuerpoCorrecto": true,
+      "cabeceraCorrecta": true,
+      "correcto": true,
+      "detalle": ""
+    },
+    {
+      "caso": "Perfil token vencido",
+      "ruta": "/api/perfil",
+      "httpEsperado": 401,
+      "httpObtenido": 401,
+      "cuerpoCorrecto": true,
+      "cabeceraCorrecta": true,
+      "correcto": true,
+      "detalle": ""
+    },
+    {
+      "caso": "Admin token vencido",
+      "ruta": "/api/admin",
+      "httpEsperado": 401,
+      "httpObtenido": 401,
+      "cuerpoCorrecto": true,
+      "cabeceraCorrecta": true,
+      "correcto": true,
+      "detalle": ""
+    },
+    {
+      "caso": "Perfil usuario",
+      "ruta": "/api/perfil",
+      "httpEsperado": 200,
+      "httpObtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabeceraCorrecta": true,
+      "correcto": true,
+      "detalle": ""
+    },
+    {
+      "caso": "Admin sin permiso",
+      "ruta": "/api/admin",
+      "httpEsperado": 403,
+      "httpObtenido": 403,
+      "cuerpoCorrecto": true,
+      "cabeceraCorrecta": true,
+      "correcto": true,
+      "detalle": ""
+    },
+    {
+      "caso": "Admin autorizado",
+      "ruta": "/api/admin",
+      "httpEsperado": 200,
+      "httpObtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabeceraCorrecta": true,
+      "correcto": true,
+      "detalle": ""
+    },
+    {
+      "caso": "Perfil administrador",
+      "ruta": "/api/perfil",
+      "httpEsperado": 200,
+      "httpObtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabeceraCorrecta": true,
+      "correcto": true,
+      "detalle": ""
+    }
+  ]
+}

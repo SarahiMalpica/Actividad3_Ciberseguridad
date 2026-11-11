@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Consulta una API local con JWT y revisa las evidencias del laboratorio de ciberseguridad.">
+  <title>Actividad 3 · Laboratorio de ciberseguridad</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <aside class="sidebar" aria-label="Navegación del laboratorio">
+    <a class="brand" href="#explorador" aria-label="Inicio del laboratorio de ciberseguridad">
+      <svg viewBox="0 0 32 36" fill="none" aria-hidden="true"><path d="M16 2 29 7v10c0 8-7 14-13 17C10 31 3 25 3 17V7L16 2Z" stroke="currentColor" stroke-width="2"/><path d="m10 18 4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Ciberseguridad<small>ACTIVIDAD 03</small></span>
+    </a>
+    <nav class="navigation" aria-label="Secciones">
+      <a class="nav-primary" href="#explorador">Consultas</a>
+      <a href="#evidencias">Evidencias y límites</a>
+    </nav>
+    <p class="environment">Laboratorio local<small>Windows · LocalStack<br>Sin una cuenta real de AWS</small></p>
+  </aside>
+
+  <main id="contenido">
+    <section id="explorador" aria-labelledby="titulo">
+      <header class="page-heading">
+        <div><p class="eyebrow">LABORATORIO DE CIBERSEGURIDAD</p><h1 id="titulo">Explorador de la API<span>.</span></h1><p class="intro">Prueba el servicio y sus permisos.</p></div>
+        <div id="estado-servicio" class="service-status" role="status" data-state="pendiente">
+          <span class="status-dot" aria-hidden="true"></span><div><strong id="estado-titulo">Sin consultar</strong><small id="estado-detalle">Selecciona un recurso</small></div>
+        </div>
+      </header>
+      <p id="aviso-api" class="notice" role="note">Abre http://127.0.0.1:3000/ con JavaScript activado para consultar la API.</p>
+
+      <div class="workbench">
+        <section class="panel request-panel" aria-labelledby="token-titulo">
+          <h2 id="token-titulo">Consultar recurso</h2>
+          <label for="jwt-token">JWT de laboratorio <span>(opcional)</span></label>
+          <div class="token-row">
+            <input id="jwt-token" type="password" autocomplete="off" spellcheck="false" autocapitalize="none" placeholder="Pega el JWT, sin Bearer" aria-describedby="token-ayuda" disabled>
+            <button id="borrar-token" class="button clear-button" type="button" disabled>Borrar token</button>
+          </div>
+          <p id="token-ayuda" class="field-note" role="status">Sin token: las rutas protegidas responderán 401.</p>
+
+          <div class="endpoint-list">
+            <article class="endpoint-card">
+              <div><h3>Estado <span class="access-tag">Público</span></h3><p class="route"><span>GET</span> <code>/health</code></p></div>
+              <button id="consultar-estado" class="button button-primary" type="button" disabled><span class="button-label">Consultar estado</span></button>
+            </article>
+            <article class="endpoint-card">
+              <div><h3>Perfil <span class="access-tag">JWT</span></h3><p class="route"><span>GET</span> <code>/api/perfil</code></p></div>
+              <button id="consultar-perfil" class="button" type="button" disabled><span class="button-label">Consultar perfil</span></button>
+            </article>
+            <article class="endpoint-card">
+              <div><h3>Administración <span class="access-tag">Admin</span></h3><p class="route"><span>GET</span> <code>/api/admin</code></p></div>
+              <button id="consultar-admin" class="button" type="button" disabled><span class="button-label">Consultar administración</span></button>
+            </article>
+          </div>
+          <p class="privacy-note">JWT solo en memoria. Se elimina al borrarlo o salir. El servidor valida los permisos.</p>
+        </section>
+
+        <section id="panel-resultado" class="panel result-panel" aria-labelledby="resultado-titulo" aria-busy="false">
+          <h2 id="resultado-titulo">Resultado</h2>
+          <dl class="response-meta">
+            <div><dt>Ruta</dt><dd id="resultado-ruta">—</dd></div>
+            <div><dt>HTTP</dt><dd id="resultado-http" data-state="pendiente">—</dd></div>
+            <div><dt>Origen</dt><dd id="resultado-origen">Sin solicitud</dd></div>
+          </dl>
+          <div class="console"><p id="resultado-formato">Respuesta JSON</p><pre id="resultado-json" tabindex="0" aria-label="Respuesta de la API">Elige un recurso para ver la respuesta.</pre></div>
+          <p id="resultado-explicacion" class="result-explanation" role="status">200: solicitud atendida · 401: autenticación rechazada · 403: sin permiso.</p>
+        </section>
+      </div>
+    </section>
+
+    <details id="evidencias" class="evidence-panel">
+      <summary>Evidencias y limitaciones <span>Resultados registrados · noviembre de 2026</span></summary>
+      <div class="evidence-content">
+        <dl class="evidence-list">
+          <div><dt>JWT</dt><dd>10 de 10 pruebas correctas. <code>Reportes/07_Pruebas_JWT_API.json</code></dd></div>
+          <div><dt>Trivy</dt><dd>Node 24 Trixie: 0 críticos, 54 altos, 87 medios y 62 bajos. <code>Reportes/06_Trivy_node24_trixie.json</code></dd></div>
+          <div><dt>ZAP</dt><dd>Tres contextos con cero alertas en los reportes válidos. Se conservan los avisos. <code>Reportes/ZAP/</code> (08b, 09c y 10).</dd></div>
+          <div><dt>S3 e IAM</dt><dd>Cifrado AES256, cuatro bloqueos públicos y política de lectura del bucket. Fuentes: <code>Reportes/01_Cifrado_S3.json</code>, <code>Reportes/02_Bloqueo_publico_S3.json</code> y los reportes IAM 11 a 17.</dd></div>
+        </dl>
+        <p><strong>Alcance:</strong> solo las consultas a la API son en vivo. S3 e IAM son componentes independientes; la API devuelve datos simulados y no accede al bucket. Terraform configura S3 en LocalStack.</p>
+        <p><strong>Límites:</strong> los resultados anteriores de ZAP no cubren esta página ni DOM XSS. Las consultas IAM registradas no demuestran denegaciones efectivas. Cero alertas o críticos no significa ausencia de vulnerabilidades.</p>
+      </div>
+    </details>
+    <footer><span>Actividad 3 · Ciberseguridad</span><span>[NOMBRE] · [MATRÍCULA]</span></footer>
+  </main>
+</body>
+</html>

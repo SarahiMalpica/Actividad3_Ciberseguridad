@@ -1,0 +1,44 @@
+{
+  "fechaUTC": "2026-11-09T00:21:52.1074742Z",
+  "endpoint": "http://127.0.0.1:4566",
+  "politicaArn": "arn:aws:iam::000000000000:policy/PoliticaLecturaActividad3",
+  "consultaPolitica": {
+    "Policy": {
+        "PolicyName": "PoliticaLecturaActividad3",
+        "PolicyId": "AQEPX18O630PRNZDT15NM",
+        "Arn": "arn:aws:iam::000000000000:policy/PoliticaLecturaActividad3",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 1,
+        "PermissionsBoundaryUsageCount": 0,
+        "IsAttachable": true,
+        "CreateDate": "2026-11-08T23:53:42.805444+00:00",
+        "UpdateDate": "2026-11-08T23:53:42.805444+00:00",
+        "Tags": []
+    }
+},
+  "consultaVersion": {
+    "PolicyVersion": {
+        "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "ListarBucketLaboratorio",
+                    "Effect": "Allow",
+                    "Action": "s3:ListBucket",
+                    "Resource": "arn:aws:s3:::actividad3-seguro-2024"
+                },
+                {
+                    "Sid": "LeerObjetosLaboratorio",
+                    "Effect": "Allow",
+                    "Action": "s3:GetObject",
+                    "Resource": "arn:aws:s3:::actividad3-seguro-2024/*"
+                }
+            ]
+        },
+        "VersionId": "v1",
+        "IsDefaultVersion": true,
+        "CreateDate": "2026-11-08T23:53:42.805444+00:00"
+    }
+}
+}

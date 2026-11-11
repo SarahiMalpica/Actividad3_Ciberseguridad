@@ -1,0 +1,43 @@
+{
+  "rol": "usuario",
+  "inicio": "2026-11-08T22:30:03.331Z",
+  "fin": "2026-11-08T22:30:47.730Z",
+  "analisisCompletado": false,
+  "codigoZap": 0,
+  "comprobaciones": [
+    {
+      "momento": "antes",
+      "ruta": "/health",
+      "esperado": 200,
+      "obtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    },
+    {
+      "momento": "antes",
+      "ruta": "/api/perfil",
+      "esperado": 200,
+      "obtenido": 200,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    },
+    {
+      "momento": "antes",
+      "ruta": "/api/admin",
+      "esperado": 403,
+      "obtenido": 403,
+      "cuerpoCorrecto": true,
+      "cabecerasCorrectas": true
+    }
+  ],
+  "caducidadTokenSegundos": 1200,
+  "alcance": "http://127.0.0.1:3000",
+  "reglaDomXssExcluida": 40026,
+  "clientIntegration": "desactivado; se conservan avisos de dependencias",
+  "copiasCompartibles": "Solo credenciales redactadas; hallazgos y contadores conservados.",
+  "redacciones": 0,
+  "indexJsSha256": "ba32c49181281d8a42a118c7ef8475c524e3da84be521d3e416d6c0fa9320b44",
+  "politicaSha256": "b894c9377c47d390d5314d14a01506dd5ad62fa45afde5c953198c7bd9b479bf",
+  "ejecutorSha256": "460fc5340ff39368b497567c7a12816beae35591b1113c7790db4bff2f60ec35",
+  "error": "fetch failed"
+}

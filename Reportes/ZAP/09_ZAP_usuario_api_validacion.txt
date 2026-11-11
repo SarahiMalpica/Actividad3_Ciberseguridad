@@ -1,0 +1,8 @@
+983 [main] INFO  org.parosproxy.paros.Constant - Copying default configuration to D:\Actividad3_Ciberseguridad\Herramientas\ZAP\Datos-API-Usuario\config.xml
+1088 [main] INFO  org.parosproxy.paros.Constant - Creating directory D:\Actividad3_Ciberseguridad\Herramientas\ZAP\Datos-API-Usuario\session
+1088 [main] INFO  org.parosproxy.paros.Constant - Creating directory D:\Actividad3_Ciberseguridad\Herramientas\ZAP\Datos-API-Usuario\dirbuster
+1088 [main] INFO  org.parosproxy.paros.Constant - Creating directory D:\Actividad3_Ciberseguridad\Herramientas\ZAP\Datos-API-Usuario\fuzzers
+1089 [main] INFO  org.parosproxy.paros.Constant - Creating directory D:\Actividad3_Ciberseguridad\Herramientas\ZAP\Datos-API-Usuario\plugin
+
+
+Codigo de salida de ZAP: 0
