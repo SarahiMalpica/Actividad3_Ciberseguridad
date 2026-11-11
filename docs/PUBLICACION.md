@@ -34,3 +34,9 @@ La selección publicable se mantiene en `C:\Users\sarah\Documents\ChatGPT\CIBERS
 ## Adaptación posterior para Render
 
 El commit inicial de GitHub conserva la página local. La adaptación posterior añade configuración del servidor, botones y emisión de JWT solo en modo demo, pruebas reproducibles y `render.yaml` con el plan Free. La adaptación se publica como un commit posterior que conserva el historial; tener estos archivos en GitHub no implica que la demo esté desplegada. El [reporte 19](../Reportes/19_Preparacion_Render.json) acredita pruebas locales. La [guía de Render](RENDER.md) describe la separación de claves y las verificaciones pendientes antes de anunciar un enlace público.
+
+## Publicación de la demo
+
+El servicio se desplegó con autorización en el plan Free de `My Workspace`. La [demo pública](https://actividad3-ciberseguridad.onrender.com/) sirve la página y la API desde el mismo origen HTTPS. El [reporte 20](../Reportes/20_Despliegue_Render.json) acredita las comprobaciones del servicio alojado. La clave de Windows y el token de LocalStack no se copiaron a Render; la demo genera su propia clave efímera en memoria.
+
+La herramienta de Render se conserva fuera del repositorio y su acceso privado se guarda en el perfil local del propietario. La carpeta `.render/` también queda excluida por precaución. Los cambios de documentación posteriores al commit desplegado no alteran los archivos que sirven la página ni activan despliegues automáticos.

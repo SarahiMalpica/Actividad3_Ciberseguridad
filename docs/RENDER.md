@@ -2,13 +2,15 @@
 
 ## Estado y alcance
 
-La adaptación está preparada y probada localmente. No se ha desplegado ni existe todavía una dirección pública de la demo. El despliegue necesita acceso a la cuenta de Render del propietario; publicar los archivos en GitHub no pone la demo en línea.
+La demo está publicada en **[https://actividad3-ciberseguridad.onrender.com/](https://actividad3-ciberseguridad.onrender.com/)**. Se creó un único servicio con el plan **Free** en `My Workspace`, mediante la herramienta oficial Render CLI 2.36.0 y la autorización del propietario.
+
+Render confirmó el despliegue `live` del commit `f0b4da39fe389d87807093cb15fe558dcf7e5cde`. Los logs confirmaron Node.js 24.13.0 y el arranque de la API en `0.0.0.0:10000`. Después se verificaron 23 casos por HTTPS, sin fallos; consulta el [reporte 20](../Reportes/20_Despliegue_Render.json).
 
 El profesor podrá abrir un enlace HTTPS y consultar la página y la API sin instalar herramientas. La API devuelve exclusivamente los datos simulados del laboratorio. LocalStack, Terraform, Docker, Trivy y ZAP siguen siendo componentes o evidencias del laboratorio local; no se ejecutan en Render.
 
-## Configuración prevista
+## Configuración aplicada
 
-El archivo [render.yaml](../render.yaml) declara un solo servicio web:
+El archivo [render.yaml](../render.yaml), validado correctamente por Render CLI, declara un solo servicio web. El servicio se creó directamente con esos mismos parámetros; no se creó un Blueprint administrado ni otros recursos:
 
 | Parámetro | Valor |
 |---|---|
@@ -70,7 +72,9 @@ node pruebas-render.cjs
 
 La suite comprueba configuración, emisión, aislamiento de claves, permisos, JSON inválido, límites y botones con el JavaScript real ejecutado en un DOM mínimo. Incluye la regresión local de 47 casos. El [reporte 19](../Reportes/19_Preparacion_Render.json) conserva los 43 casos de adaptación y las huellas de los archivos examinados. Los informes nuevos van a `Reportes/Nuevas/`, excluido de Git hasta revisarlos.
 
-La revisión visual nueva de la demo quedó pendiente: el control de navegador se detuvo porque no pudo establecer con certeza la URL. No se sustituyó por una supuesta revisión visual. Las pruebas automatizadas emplean HTTP local; aún falta verificar HTTPS, la instancia de Render y sus cuotas tras desplegar.
+El [reporte 20](../Reportes/20_Despliegue_Render.json) registra 21 casos de HTTPS real y dos del JavaScript real del cliente con HTTPS y DOM mínimo. Comprueba archivos idénticos a Git, cabeceras, configuración pública, emisión de JWT de cinco minutos, roles, rechazo de tokens manipulados, ausencia de archivos privados, borrado y salida. No guarda JWT ni claves. No se ejecutaron de nuevo LocalStack, Terraform, Trivy o ZAP.
+
+La revisión visual nueva de la demo sigue pendiente: el control de navegador se detuvo porque no pudo establecer con certeza la URL. No se sustituyó por una supuesta revisión visual. El estado operativo y las respuestas HTTPS se comprobaron directamente; no se garantiza disponibilidad futura ni se simularon consumos para probar las cuotas de Render.
 
 ## Fuentes oficiales consultadas
 

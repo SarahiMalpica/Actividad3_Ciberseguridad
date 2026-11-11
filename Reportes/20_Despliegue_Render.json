@@ -1,0 +1,134 @@
+{
+  "fecha": "2026-11-11T05:36:12.969Z",
+  "url": "https://actividad3-ciberseguridad.onrender.com",
+  "planConfirmado": "free",
+  "despliegueConfirmado": "live",
+  "nodeConfirmadoEnLogs": "24.13.0",
+  "commitDesplegado": "f0b4da39fe389d87807093cb15fe558dcf7e5cde",
+  "alcance": "Solicitudes HTTPS a Render y JavaScript real con DOM minimo. No equivale a revision visual ni verifica cuotas o disponibilidad futura. No ejecuta LocalStack, Terraform, Trivy o ZAP. No guarda JWT ni claves.",
+  "total": 23,
+  "correctas": 23,
+  "fallidas": 0,
+  "huellasPagina": {
+    "index.html": "351005711b5464289d318ffc00854684afa60804bba642a62bc0dc3b7677df30",
+    "styles.css": "6ac484614925330bb01f4b927956d4d8818e33cc0a3521b53ebeebb2e597bf90",
+    "app.js": "9ad77ea363ff9a54fc743b6cc7762147dec5ad35b5ed5e81faeb6c9a58c1b3e7"
+  },
+  "resultados": [
+    {
+      "capa": "HTTPS real",
+      "caso": "Estado publico 200 y JSON correcto",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Archivo publicado coincide con Git: /",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Archivo publicado coincide con Git: /styles.css",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Archivo publicado coincide con Git: /app.js",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Configuracion de demo y origen HTTPS correctos",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Sin JWT: /api/perfil responde 401",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Sin JWT: /api/admin responde 401",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Emitir JWT de cinco minutos: usuario",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Emitir JWT de cinco minutos: admin",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "usuario: /api/perfil responde 200",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "usuario: /api/admin responde 403",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "admin: /api/perfil responde 200",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "admin: /api/admin responde 200",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "JWT manipulado rechazado con 401",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Emision desde origen ajeno rechazada con 403",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Rol de prueba inexistente rechazado con 400",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Archivo privado no servido: /.env",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Archivo privado no servido: /index.js",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Archivo privado no servido: /configuracion-servidor.cjs",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Archivo privado no servido: /package-lock.json",
+      "correcto": true
+    },
+    {
+      "capa": "HTTPS real",
+      "caso": "Archivo privado no servido: /render.yaml",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTPS real y DOM minimo",
+      "caso": "Usuario, perfil 200, admin 403 y borrar 401",
+      "correcto": true
+    },
+    {
+      "capa": "Cliente con HTTPS real y DOM minimo",
+      "caso": "Administrador 200 y salir elimina el JWT",
+      "correcto": true
+    }
+  ]
+}

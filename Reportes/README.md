@@ -59,4 +59,12 @@ El [reporte 19](19_Preparacion_Render.json) registra 43 comprobaciones de adapta
 
 Los 43 casos incluyen 17 de configuración, una ejecución de la regresión local, 20 de HTTP local con Render emulado, dos del cliente con HTTP real local y tres del cliente simuladas. La regresión de 47 casos contiene 34 de HTTP real, ocho del cliente con API real y cinco simuladas. No se deben sumar ambos totales como pruebas independientes: la regresión está incluida como comprobación de la suite de adaptación.
 
-La emisión de JWT se probó con claves efímeras distintas de la clave del laboratorio. Los tokens no se guardaron en los informes. No se ha desplegado la demo ni comprobado su HTTPS; la revisión visual nueva quedó pendiente por un bloqueo del control de navegador. Consulta el [alcance de Render](../docs/RENDER.md).
+La emisión de JWT se probó con claves efímeras distintas de la clave del laboratorio. Los tokens no se guardaron en los informes. Durante esa preparación aún no se había desplegado la demo ni comprobado su HTTPS; el despliegue posterior está registrado en el reporte 20. La revisión visual nueva quedó pendiente por un bloqueo del control de navegador. Consulta el [alcance de Render](../docs/RENDER.md).
+
+## Despliegue real en Render
+
+El [reporte 20](20_Despliegue_Render.json) registra 23 comprobaciones correctas de la [demo pública](https://actividad3-ciberseguridad.onrender.com/), sin fallos. A diferencia del reporte 19, estas solicitudes se enviaron por HTTPS al servicio realmente desplegado.
+
+Render confirmó el estado `live`, el plan Free y Node.js 24.13.0 para el commit `f0b4da39fe389d87807093cb15fe558dcf7e5cde`. Se comprobaron 21 casos de HTTPS real y dos del cliente ejecutado con DOM mínimo y HTTPS real: contenido de la página, archivos, cabeceras, configuración, JWT de cinco minutos, permisos usuario 200/403, administrador 200/200, ausencia de token 401, manipulación rechazada y limpieza de los tokens.
+
+El informe conserva las huellas de los archivos servidos y no contiene JWT ni claves. La revisión visual nueva y las cuotas de Render no están acreditadas por estas pruebas. Los resultados de infraestructura y de Trivy/ZAP siguen siendo históricos.
